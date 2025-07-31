@@ -17,6 +17,7 @@ pipeline {
         SONARSCANNER = 'sonarscanner'
         SONARSERVER = 'sonarserver'
     }
+
     stages {
         stage('Build') {
             steps {
@@ -33,7 +34,7 @@ pipeline {
             }
         }
 
-        stage('Tesst') {
+        stage('Test') {
             steps {
                 sh 'mvn test'
             }
@@ -41,7 +42,8 @@ pipeline {
 
         stage('CheckStyle Analysis') {
             steps {
-                sh 'mvn -s settings.xml checkstyle:checkstyle'
+                //sh 'mvn -s settings.xml checkstyle:checkstyle'
+                sh 'mvn checkstyle:checkstyle'
             }
         }
 
