@@ -42,8 +42,8 @@ pipeline {
 
         stage('CheckStyle Analysis') {
             steps {
-                //sh 'mvn -s settings.xml checkstyle:checkstyle'
-                sh 'mvn checkstyle:checkstyle'
+                sh 'mvn -s settings.xml checkstyle:checkstyle'
+                //sh 'mvn checkstyle:checkstyle'
             }
         }
 
@@ -54,14 +54,14 @@ pipeline {
             steps {
                 withSonarQubeEnv("${SONARSERVER}") {
                      sh '''${scannerHome}/bin/sonar-scanner
-                    -Dsonar.projectKey=vprofile \
-                    -Dsonar.projectName=vprofile \
-                    -Dsonar.projectVersion=1.0 \
-                    -Dsonar.sources=src/ \
-                    -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
-                    -Dsonar.junit.reportPaths=target/surefire-reports/ \
-                    -Dsonar.jacoco.reportPaths=target/jacoco.exec \
-                    -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
+                        -Dsonar.projectKey=vprofile \
+                        -Dsonar.projectName=vprofile \
+                        -Dsonar.projectVersion=1.0 \
+                        -Dsonar.sources=src/ \
+                        -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
+                        -Dsonar.junit.reportPaths=target/surefire-reports/ \
+                        -Dsonar.jacoco.reportPaths=target/jacoco.exec \
+                        -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
                 }               
             }
         }
