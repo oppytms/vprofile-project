@@ -1,6 +1,6 @@
 def COLOR_MAP = [
     'SUCCESS': 'good',
-    'FAILURE': 'danger'
+    'FAILURE': 'danger',
 ]
 
 pipeline {
@@ -107,43 +107,4 @@ pipeline {
                 message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at : ${env.BUILD_URL}"    
         }
     } 
-
-/*
-    post {
-        always {
-            slackSend (
-                channel: '#jenkinscicd',
-                color: '#FFFF00',
-                message: "*${env.JOB_NAME}* - Build #${env.BUILD_NUMBER} *${currentBuild.currentResult}* (<${env.BUILD_URL}|Open>)"
-            )
-        }
-        success {
-            slackSend (
-                channel: '#jenkinscicd',
-                color: 'good',
-                message: ":white_check_mark: *${env.JOB_NAME}* - Build #${env.BUILD_NUMBER} *SUCCEEDED*"
-            )
-        }
-        failure {
-            slackSend (
-                channel: '#jenkinscicd',
-                color: 'danger',
-                message: ":x: *${env.JOB_NAME}* - Build #${env.BUILD_NUMBER} *FAILED*"
-            )
-        }
-        unstable {
-            slackSend (
-                channel: '#jenkinscicd',
-                color: 'warning',
-                message: ":warning: *${env.JOB_NAME}* - Build #${env.BUILD_NUMBER} *UNSTABLE*"
-            )
-        }
-        aborted {
-            slackSend (
-                channel: '#jenkinscicd',
-                color: '#CCCCCC',
-                message: ":black_circle_for_record: *${env.JOB_NAME}* - Build #${env.BUILD_NUMBER} *ABORTED*"
-            )
-        }
-}*/
 }
