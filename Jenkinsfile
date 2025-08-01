@@ -73,5 +73,25 @@ pipeline {
                 }
             }
         }
+
+        stage("UploadArtifact") {
+            steps {
+                nexusArtifactUploader(
+                    nexusVersion: 'nexus3', // Or nexus2
+                    protocol: 'http', // Or https
+                    nexusUrl: "${NEXUSIP}:${NEXUSPORT}",
+                    groupId: 'QA',
+                    version: "${env.BUILD_ID}-${BUILD_TIMESTAMP}", 
+                    repository: "${RELEASE_REPO}", // Or your repository name
+                    credentialsId: "${NEXUS_LOGIN}", // Your Jenkins credential ID
+                    artifacts: [
+                        [artifactId: 'vproapp',
+                         classifier: '', 
+                         file: 'target/vprofile-v2.war', 
+                         type: 'war']
+                    ]
+                )
+            }
+        }
     }
 }
